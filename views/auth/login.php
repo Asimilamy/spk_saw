@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/fontawesome-free-5.8.2-web/css/all.min.css">
     </head>
-    <body class="bg-default" style="padding-top: 5%; padding-bottom: 5%;">
+    <body class="bg-success" style="padding-top: 5%; padding-bottom: 5%;">
         <div class="container d-flex justify-content-center">
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="card border-primary mt-5 shadow">
