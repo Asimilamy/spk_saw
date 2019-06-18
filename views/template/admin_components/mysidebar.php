@@ -1,7 +1,8 @@
 <?php
 $page = filter_input(INPUT_GET, 'hal', FILTER_DEFAULT);
-$default_img = 'assets/admin_lte/dist/img/user2-160x160.jpg';
 $name = $_SESSION['user']['name'];
+$default_img = 'assets/admin_lte/dist/img/avatar5.png';
+$user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['user']['user_img'] ;
 ?>
 
 <aside class="main-sidebar">
@@ -10,7 +11,7 @@ $name = $_SESSION['user']['name'];
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?php echo $default_img; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo $user_img; ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><?php echo $name; ?></p>

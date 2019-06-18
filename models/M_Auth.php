@@ -1,5 +1,6 @@
 <?php
 $base_path = isset($base_path) ? $base_path : '../' ;
+include_once $base_path . 'helpers/function.php';
 
 class M_Auth {
     private $db = NULL;
@@ -40,7 +41,7 @@ class M_Auth {
             'username' => $row->username,
             'name' => $row->name,
             'email' => $row->email,
-            'user_img' => '',
+            'user_img' => $row->user_img,
             'created_at' => $row->created_at,
         ];
     }

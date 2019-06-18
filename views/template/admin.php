@@ -17,6 +17,8 @@ $setting['base'] = substr($_SERVER['PHP_SELF'], 0, -9);
         <link rel="stylesheet" href="assets/admin_lte/bower_components/font-awesome/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="assets/admin_lte/bower_components/Ionicons/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="assets/admin_lte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="assets/admin_lte/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -37,25 +39,25 @@ $setting['base'] = substr($_SERVER['PHP_SELF'], 0, -9);
         <div class="wrapper">
             
             <!-- main-header -->
-            <?php include 'admin_components/header.php'; ?>
+            <?php include_once 'admin_components/header.php'; ?>
             <!-- /.main-header -->
             
             <!-- main-sidebar -->
-            <?php include 'admin_components/mysidebar.php'; ?>
+            <?php include_once 'admin_components/mysidebar.php'; ?>
             <!-- /.main-sidebar -->
 
             <!-- content-wrapper -->
             <div class="content-wrapper">
-                <?php include 'admin_components/routes.php'; ?>
+                <?php include_once 'admin_components/routes.php'; ?>
             </div>
             <!-- /.content-wrapper -->
 
             <!-- main-footer -->
-            <?php include 'admin_components/footer.php'; ?>
+            <?php include_once 'admin_components/footer.php'; ?>
             <!-- /.main-footer -->
             
             <!-- Control Sidebar -->
-            <?php // include 'admin_components/control_sidebar.php'; ?>
+            <?php // include_once 'admin_components/control_sidebar.php'; ?>
             <!-- /.Control Sidebar -->
 
         </div>
@@ -64,18 +66,23 @@ $setting['base'] = substr($_SERVER['PHP_SELF'], 0, -9);
         <script src="assets/admin_lte/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap 3.3.7 -->
         <script src="assets/admin_lte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="assets/admin_lte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="assets/admin_lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <!-- SlimScroll -->
         <script src="assets/admin_lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
         <!-- FastClick -->
         <script src="assets/admin_lte/bower_components/fastclick/lib/fastclick.js"></script>
         <!-- AdminLTE App -->
+        <script src="assets/admin_lte/dist/js/app.min.js"></script>
         <script src="assets/admin_lte/dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="assets/admin_lte/dist/js/demo.js"></script>
         <script>
-        $(document).ready(function () {
-            $('.sidebar-menu').tree()
-        })
+            $(document).ready(function () {
+                $('.sidebar-menu').tree()
+            });
         </script>
+        <?php include_once 'views/script/page_js.php'; ?>
     </body>
 </html>

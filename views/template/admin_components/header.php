@@ -1,6 +1,8 @@
 <?php
 $name = isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : 'Alexander Pierce' ;
 $date_registered = format_date($_SESSION['user']['created_at'], 'M Y');
+$default_img = 'assets/admin_lte/dist/img/avatar5.png';
+$user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['user']['user_img'] ;
 ?>
 
 <header class="main-header">
@@ -26,13 +28,13 @@ $date_registered = format_date($_SESSION['user']['created_at'], 'M Y');
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/admin_lte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img src="<?php echo $user_img; ?>" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?php echo $name; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="assets/admin_lte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="<?php echo $user_img; ?>" class="img-circle" alt="User Image">
 
                             <p>
                                 <?php echo $name; ?>

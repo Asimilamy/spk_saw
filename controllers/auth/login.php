@@ -1,9 +1,9 @@
 <?php
 session_start();
 $base_path = '../../';
-include $base_path.'helpers/function.php';
-include $base_path.'models/M_Auth.php';
-include $base_path.'config/Database.php';
+include_once $base_path.'helpers/function.php';
+include_once $base_path.'models/M_Auth.php';
+include_once $base_path.'config/Database.php';
 
 $database = new Database();
 $db = $database->getKoneksi();

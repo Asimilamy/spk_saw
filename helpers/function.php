@@ -1,10 +1,13 @@
 <?php
+$base_path = isset($base_path) ? $base_path : '' ;
+include_once 'class.upload.php-master/src/class.upload.php';
+
 function datatables_conn() {
 	// SQL server connection information
 	$conn = array(
 		'user' => 'root',
 		'pass' => '',
-		'db'   => 'db_app_penjualan',
+		'db'   => 'db_spk_intan',
 		'host' => 'localhost'
 	);
 
@@ -114,4 +117,35 @@ function render_alert($type = 'danger', $is_dissmissable = TRUE, $title = 'Alert
 	$alert .= '</div>';
 
 	return $alert;
+}
+
+function render_alert_lte($type = 'danger', $is_dissmissable = TRUE, $title = 'Alert!', $msg = 'This is Alert!') {
+	$dissmissable = $is_dissmissable?'alert-dissmissable':'';
+	$alert = '<div class="alert alert-' . $type . ' ' . $dissmissable . '">';
+		if ($is_dissmissable) {
+			$alert .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+		}
+		$alert .= '<h4>' . $title . '</h4>';
+		$alert .= $msg;
+	$alert .= '</div>';
+
+	return $alert;
+}
+
+function upload_files($files, $dir) {
+    $handle = new upload($files);
+    if ($handle->uploaded) {
+        $handle->image_resize = true;
+        $handle->image_y = 150;
+        $handle->image_x = 150;
+        $handle->file_overwrite = true;
+		
+		$handle->process($dir);
+		if ($handle->processed) {
+			$handle->clean();
+			return ['status' => 'success', 'img_name' => $files['name']];
+		} else {
+			return ['status' => 'error', 'msg' => $handle->error];
+		}
+	}
 }
