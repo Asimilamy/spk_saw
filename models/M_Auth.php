@@ -40,6 +40,8 @@ class M_Auth {
             'username' => $row->username,
             'name' => $row->name,
             'email' => $row->email,
+            'user_img' => '',
+            'created_at' => $row->created_at,
         ];
     }
 }
