@@ -67,33 +67,36 @@ if ($act_post == 'submit_form') {
         $master_data = array_merge($master_data, ['id' => $id]);
     }
     
-    $master = $base_model->submit_data('criterias', $master_data);
-    if ($master['status'] == 'error') {
-        $master['status'] = 'error';
-        $master['alert'] = render_alert_lte('danger', TRUE, 'Error!', 'Sorry system encountered error!');
+    $submit = $base_model->submit_data('criterias', $master_data);
+    if ($submit['status'] == 'error') {
+        $submit['status'] = 'error';
+        $submit['alert'] = render_alert_lte('danger', TRUE, 'Error!', 'Sorry system encountered error!');
 
         header('Content-Type: application/json');
-        echo json_encode($master);
+        echo json_encode($submit);
         exit;
     }
-    $delete = $base_model->delete_data('criteria_options', ['criteria_id' => $master['insert_id']]);
-    if ($delete['status'] == 'error') {
-        header('Content-Type: application/json');
-        echo json_encode($delete);
-        exit;
-    }
-    $total_child = count($option_name);
-    for ($i = 0; $i < $total_child; $i++) {
-        $child_data = [
-            'criteria_id' => $master['insert_id'],
-            'name' => $option_name[$i],
-            'value' => $option_value[$i],
-        ];
-        $child = $base_model->submit_data('criteria_options', $child_data);
+    if (!empty($option_name)) {
+        $master_id = $submit['insert_id'];
+        $delete = $base_model->delete_data('criteria_options', ['criteria_id' => $master_id]);
+        if ($delete['status'] == 'error') {
+            header('Content-Type: application/json');
+            echo json_encode($delete);
+            exit;
+        }
+        $total_child = count($option_name);
+        for ($i = 0; $i < $total_child; $i++) {
+            $child_data = [
+                'criteria_id' => $master_id,
+                'name' => $option_name[$i],
+                'value' => $option_value[$i],
+            ];
+            $submit = $base_model->submit_data('criteria_options', $child_data);
+        }
     }
     
     header('Content-Type: application/json');
-    echo json_encode($child);
+    echo json_encode($submit);
 } elseif ($act_post == 'delete_data') {
     $master = $base_model->delete_data('criterias', ['id' => input_post('id')]);
     if ($master['status'] == 'error') {

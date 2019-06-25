@@ -35,7 +35,7 @@ if ($act_get == 'load_table') {
     include_once $base_path . $view_path . 'detail.php';
 } elseif ($act_get == 'load_criterias') {
     $id = input_get('id');
-    $data = $m_alternative->get_values($id);
+    $values = $m_alternative->get_values($id);
     $criterias = $base_model->get_data('criterias', [], 'result');
     if (!empty($criterias)) {
         foreach ($criterias as $criteria) {
@@ -61,35 +61,40 @@ if ($act_post == 'submit_form') {
         $master_data = array_merge($master_data, ['id' => $id]);
     }
     
-    $master = $base_model->submit_data('alternatives', $master_data);
-    if ($master['status'] == 'error') {
-        $master['status'] = 'error';
-        $master['alert'] = render_alert_lte('danger', TRUE, 'Error!', 'Sorry system encountered error!');
+    $submit = $base_model->submit_data('alternatives', $master_data);
+    if ($submit['status'] == 'error') {
+        $submit['status'] = 'error';
+        $submit['alert'] = render_alert_lte('danger', TRUE, 'Error!', 'Sorry system encountered error!');
 
         header('Content-Type: application/json');
-        echo json_encode($master);
+        echo json_encode($submit);
         exit;
     }
-    $delete = $base_model->delete_data('alternative_values', ['alternative_id' => $master['insert_id']]);
-    if ($delete['status'] == 'error') {
-        header('Content-Type: application/json');
-        echo json_encode($delete);
-        exit;
-    }
-    $total_child = count($criteria_ids);
-    for ($i = 0; $i < $total_child; $i++) {
-        $child_data = [
-            'alternative_id' => $master['insert_id'],
-            'criteria_id' => $criteria_ids[$i],
-            'criteria_option_id' => $option_ids[$i],
-            'weight' => $criteria_weights[$i],
-            'value' => $criteria_values[$i],
-        ];
-        $child = $base_model->submit_data('alternative_values', $child_data);
+    if (!empty($criteria_ids)) {
+        $master_id = $submit['insert_id'];
+        $delete = $base_model->delete_data('alternative_values', ['alternative_id' => $master_id]);
+        if ($delete['status'] == 'error') {
+            header('Content-Type: application/json');
+            echo json_encode($delete);
+            exit;
+        }
+        $total_child = count($criteria_ids);
+        for ($i = 0; $i < $total_child; $i++) {
+            $child_data = [
+                'alternative_id' => $master_id,
+                'criteria_id' => $criteria_ids[$i],
+                'weight' => $criteria_weights[$i],
+                'value' => $criteria_values[$i],
+            ];
+            if (!empty($option_ids[$i])) {
+                $child_data = array_merge($child_data, ['criteria_option_id' => $option_ids[$i]]);
+            }
+            $submit = $base_model->submit_data('alternative_values', $child_data);
+        }
     }
     
     header('Content-Type: application/json');
-    echo json_encode($child);
+    echo json_encode($submit);
 } elseif ($act_post == 'delete_data') {
     $master = $base_model->delete_data('alternatives', ['id' => input_post('id')]);
     if ($master['status'] == 'error') {

@@ -63,14 +63,14 @@ class M_Alternative {
 
 	public function get_row($id = '')
 	{
-		$query = 'SELECT * FROM criterias WHERE id = ?';
+		$query = 'SELECT * FROM alternatives WHERE id = ?';
 		$stmt = $this->db->prepare($query);
 		$stmt->execute([$id]);
 		$row = $stmt->fetch(PDO::FETCH_OBJ);
 		if (!empty($row)) {
-			$data = (object) ['id' => $row->id, 'name' => $row->name, 'attribute' => $row->attribute, 'weight' => $row->weight, 'type' => $row->type, 'created_at' => $row->created_at, 'updated_at' => $row->updated_at];
+			$data = (object) ['id' => $row->id, 'name' => $row->name, 'created_at' => $row->created_at, 'updated_at' => $row->updated_at];
 		} else {
-			$data = (object) ['id' => '', 'name' => '', 'attribute' => '', 'weight' => '', 'type' => '', 'created_at' => '', 'updated_at' => ''];
+			$data = (object) ['id' => '', 'name' => '', 'created_at' => '', 'updated_at' => ''];
 		}
 
 		return $data;
