@@ -35,16 +35,10 @@ $view = isset($view)? $view : 'home' ;
                         <label for="type" class="col-xs-2">Type : </label>
                         <div class="col-xs-10"><?php echo $data->type; ?></div>
                     </div>
-                    <?php
-                    if ($data->type == 'value') {
-                        ?>
-                        <div class="row">
-                            <label for="weight" class="col-xs-2">Weight : </label>
-                            <div class="col-xs-10"><?php echo $data->weight; ?></div>
-                        </div>
-                        <?php
-                    }
-                    ?>
+                    <div class="row">
+                        <label for="weight" class="col-xs-2">Weight : </label>
+                        <div class="col-xs-10"><?php echo $data->weight; ?></div>
+                    </div>
                     <div class="row">
                         <label for="created_at" class="col-xs-2">Created At</label>
                         <div class="col-xs-10">

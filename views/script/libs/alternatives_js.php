@@ -4,6 +4,11 @@ $view = empty($page)? 'home' : $page ;
 ?>
 
 <script>
+    $(document).off('change', '.criteria-select').on('change', '.criteria-select', function() {
+        console.log($(this).find(':selected').data('id'));
+        $(this).prev().val($(this).find(':selected').data('id'));
+    });
+
     function load_criterias(id) {
         $('#criteriasForm').slideUp(function() {
             $.ajax({

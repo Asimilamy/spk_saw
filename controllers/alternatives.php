@@ -49,6 +49,10 @@ if ($act_get == 'load_table') {
 if ($act_post == 'submit_form') {
     $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
     $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
+    $criteria_ids = filter_input(INPUT_POST, 'criteria_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    $option_ids = filter_input(INPUT_POST, 'option_ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    $criteria_weights = filter_input(INPUT_POST, 'criteria_weights', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+    $criteria_values = filter_input(INPUT_POST, 'criteria_values', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
     
     $master_data = [
         'name' => $name,
@@ -58,12 +62,43 @@ if ($act_post == 'submit_form') {
     }
     
     $master = $base_model->submit_data('alternatives', $master_data);
+    if ($master['status'] == 'error') {
+        $master['status'] = 'error';
+        $master['alert'] = render_alert_lte('danger', TRUE, 'Error!', 'Sorry system encountered error!');
+
+        header('Content-Type: application/json');
+        echo json_encode($master);
+        exit;
+    }
+    $delete = $base_model->delete_data('alternative_values', ['alternative_id' => $master['insert_id']]);
+    if ($delete['status'] == 'error') {
+        header('Content-Type: application/json');
+        echo json_encode($delete);
+        exit;
+    }
+    $total_child = count($criteria_ids);
+    for ($i = 0; $i < $total_child; $i++) {
+        $child_data = [
+            'alternative_id' => $master['insert_id'],
+            'criteria_id' => $criteria_ids[$i],
+            'criteria_option_id' => $option_ids[$i],
+            'weight' => $criteria_weights[$i],
+            'value' => $criteria_values[$i],
+        ];
+        $child = $base_model->submit_data('alternative_values', $child_data);
+    }
     
     header('Content-Type: application/json');
-    echo json_encode($master);
+    echo json_encode($child);
 } elseif ($act_post == 'delete_data') {
     $master = $base_model->delete_data('alternatives', ['id' => input_post('id')]);
+    if ($master['status'] == 'error') {
+        header('Content-Type: application/json');
+        echo json_encode($master);
+        exit();
+    }
+    $child = $base_model->delete_data('alternative_values', ['alternative_id' => input_post('id')]);
     
     header('Content-Type: application/json');
-    echo json_encode($master);
+    echo json_encode($child);
 }

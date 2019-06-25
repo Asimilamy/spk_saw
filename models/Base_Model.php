@@ -21,13 +21,11 @@ class Base_Model {
 				$query .= $no > 1 ? ' AND ' : ' WHERE ' ;
 				foreach ($columns as $column => $value) {
 					$query .= $column;
-					if ($param == 'where') {
-						$query .= ' = '.$value;
+					if ($param == 'where' || $param == 'or') {
+						$query .= ' = \''.$value.'\'';
 					} elseif ($param == 'in') {
 						$value = is_array($value) ? implode('\', \'', $value) : $value ;
 						$query .= ' IN (\''.$value.'\')';
-					} elseif ($param == 'or') {
-						$query .= ' = '.$value;
 					}
 				}
 			}

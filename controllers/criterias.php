@@ -52,16 +52,16 @@ if ($act_post == 'submit_form') {
     $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
     $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
     $attribute = filter_input(INPUT_POST, 'attribute', FILTER_DEFAULT);
-    $weight = filter_input(INPUT_POST, 'weight', FILTER_DEFAULT);
     $type = filter_input(INPUT_POST, 'type', FILTER_DEFAULT);
+    $weight = filter_input(INPUT_POST, 'weight', FILTER_DEFAULT);
     $option_name = filter_input(INPUT_POST, 'option_name', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
     $option_value = filter_input(INPUT_POST, 'option_value', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
     
     $master_data = [
         'name' => $name,
         'attribute' => $attribute,
-        'weight' => empty($weight) ? 0 : $weight ,
         'type' => $type,
+        'weight' => $weight,
     ];
     if (!empty($id)) {
         $master_data = array_merge($master_data, ['id' => $id]);

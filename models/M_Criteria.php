@@ -30,8 +30,8 @@ class M_Criteria {
 			array( 'db' => 'id', 'dt' => 2, 'field' => 'id' ),
 			array( 'db' => 'name', 'dt' => 3, 'field' => 'name' ),
 			array( 'db' => 'attribute', 'dt' => 4, 'field' => 'attribute' ),
-			array( 'db' => 'weight', 'dt' => 5, 'field' => 'weight' ),
-			array( 'db' => 'type', 'dt' => 6, 'field' => 'type' ),
+			array( 'db' => 'type', 'dt' => 5, 'field' => 'type' ),
+			array( 'db' => 'weight', 'dt' => 6, 'field' => 'weight' ),
 		);
 
 		// SQL server connection information
@@ -69,9 +69,9 @@ class M_Criteria {
 		$stmt->execute([$id]);
 		$row = $stmt->fetch(PDO::FETCH_OBJ);
 		if (!empty($row)) {
-			$data = (object) ['id' => $row->id, 'name' => $row->name, 'attribute' => $row->attribute, 'weight' => $row->weight, 'type' => $row->type, 'created_at' => $row->created_at, 'updated_at' => $row->updated_at];
+			$data = (object) ['id' => $row->id, 'name' => $row->name, 'attribute' => $row->attribute, 'type' => $row->type, 'weight' => $row->weight, 'created_at' => $row->created_at, 'updated_at' => $row->updated_at];
 		} else {
-			$data = (object) ['id' => '', 'name' => '', 'attribute' => '', 'weight' => '', 'type' => '', 'created_at' => '', 'updated_at' => ''];
+			$data = (object) ['id' => '', 'name' => '', 'attribute' => '', 'type' => '', 'weight' => '', 'created_at' => '', 'updated_at' => ''];
 		}
 
 		return $data;
