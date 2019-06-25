@@ -8,4 +8,6 @@ if ($page == 'users' || $page == 'criterias' || $page == 'alternatives') {
     if ($page == 'criterias') {
         include_once 'views/script/libs/'.$page.'_js.php';
     }
+} elseif ($page == 'home') {
+    include_once 'views/script/libs/'.$page.'_js.php';
 }

@@ -8,7 +8,17 @@ class Base_Model {
     public function __construct($db)
     {
         $this->db = $db;
-    }
+	}
+	
+	public function count($tbl_name, $column)
+	{
+		$query = 'SELECT COUNT('.$column.') AS total FROM '.$tbl_name;
+		$stmt = $this->db->prepare($query);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$total = !empty($result) ? $result->total : 0 ;
+		return $total;
+	}
 
     public function insert($tbl_name, $data = [])
     {
