@@ -95,8 +95,14 @@ if ($act_post == 'submit_form') {
     header('Content-Type: application/json');
     echo json_encode($child);
 } elseif ($act_post == 'delete_data') {
-    $data = $m_users->delete_data($id);
+    $master = $base_model->delete_data('criterias', ['id' => input_post('id')]);
+    if ($master['status'] == 'error') {
+        header('Content-Type: application/json');
+        echo json_encode($master);
+        exit();
+    }
+    $child = $base_model->delete_data('criteria_options', ['criteria_id' => input_post('id')]);
     
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode($child);
 }

@@ -90,7 +90,7 @@ $view = empty($page)? 'home' : $page ;
             url: 'controllers/<?php echo $view; ?>.php',
             type: 'POST',
             data: {'act': 'delete_data', 'id': id},
-            success: function(html) {
+            success: function(data) {
                 $('#box-alert').html(data.alert);
                 $('#box-alert').slideDown();
                 load_table();

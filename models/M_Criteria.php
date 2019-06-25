@@ -25,7 +25,7 @@ class M_Criteria {
 		$data['columns'] = array(
 			array( 'db' => 'id', 'dt' => 1, 'field' => 'id',
 				'formatter' => function($d, $row) {
-					return $this->tbl_btn($d, $row[3]);
+					return $this->tbl_btn($d, $row[2]);
 				} ),
 			array( 'db' => 'id', 'dt' => 2, 'field' => 'id' ),
 			array( 'db' => 'name', 'dt' => 3, 'field' => 'name' ),
