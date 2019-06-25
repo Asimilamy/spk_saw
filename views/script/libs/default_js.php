@@ -97,4 +97,20 @@ $view = empty($page)? 'home' : $page ;
             }
         });
     }
+
+    function view_detail(id) {
+        $('.form-row').slideUp(function() {
+            $(this).remove();
+        });
+        $('.btn-add').slideDown();
+        $.ajax({
+            url: 'controllers/<?php echo $view; ?>.php',
+            type: 'GET',
+            data: {'act': 'view_detail', 'id': id},
+            success: function(html) {
+                $('.main-frame').prepend(html);
+                moveTo('.content');
+            }
+        });
+    }
 </script>

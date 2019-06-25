@@ -7,7 +7,7 @@ $view = empty($page)? 'home' : $page ;
     $(document).off('change', '#type').on('change', '#type', function() {
         let criteria_id = $('input[name=id]').val();
         let type = $(this).val();
-        get_options_form(criteria_id, type);
+        get_options_form(criteria_id, type, 'form');
     });
 
     $(document).off('click', '.btn-add-options').on('click', '.btn-add-options', function() {
@@ -20,12 +20,12 @@ $view = empty($page)? 'home' : $page ;
         });
     });
 
-    function get_options_form(criteria_id, type) {
+    function get_options_form(criteria_id, type, view) {
         $('#attribute-options').slideUp(function() {
             $.ajax({
                 url: 'controllers/<?php echo $view; ?>.php',
                 type: 'GET',
-                data: {'act': 'get_options_form', 'criteria_id': criteria_id, 'type': type},
+                data: {'act': 'get_options_form', 'criteria_id': criteria_id, 'type': type, 'view': view},
                 success: function(html) {
                     $('#attribute-options').html(html).promise().done(function() {
                         $('#attribute-options').slideDown().promise().done(function() {

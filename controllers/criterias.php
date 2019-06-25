@@ -30,14 +30,19 @@ if ($act_get == 'load_table') {
     $id = input_get('id');
     $data = $m_criteria->get_row($id);
     include_once $base_path . $view_path . 'form.php';
+} elseif($act_get == 'view_detail') {
+    $id = input_get('id');
+    $data = $m_criteria->get_row($id);
+    include_once $base_path . $view_path . 'detail.php';
 } elseif ($act_get == 'get_options_form') {
     $criteria_id = input_get('criteria_id');
     $type = input_get('type');
+    $view = input_get('view');
     $data_options = $m_criteria->get_options($criteria_id);
     if ($type == 'value') {
         echo render_alert_lte('info', FALSE, 'Attention!', 'Take attributes values as criterias values!');
     } elseif ($type == 'option') {
-        echo render_options($data_options);
+        echo render_options($data_options, $view);
     }
 } elseif ($act_get == 'add_options') {
     echo options_form(TRUE, '', '', 'remove');

@@ -71,5 +71,5 @@ $view = isset($view)? $view : 'home' ;
 </div>
 
 <script>
-    get_options_form($('input[name=id]').val(), $('#type').val());
+    get_options_form($('input[name=id]').val(), $('#type').val(), 'form');
 </script>
