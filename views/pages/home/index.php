@@ -18,7 +18,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3><div id="userCount"></div></h3>
+                    <h3><div id="userCount">0</div></h3>
 
                     <p>Users Data</p>
                 </div>
@@ -33,7 +33,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3><div id="criteriaCount"></div></h3>
+                    <h3><div id="criteriaCount">0</div></h3>
 
                     <p>Criterias</p>
                 </div>
@@ -48,7 +48,7 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3><div id="alternativeCount"></div></h3>
+                    <h3><div id="alternativeCount">0</div></h3>
 
                     <p>Alternatives</p>
                 </div>
@@ -63,7 +63,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3><div id="evaluationCount"></div></h3>
+                    <h3><div id="evaluationCount">0</div></h3>
 
                     <p>Evaluations</p>
                 </div>
