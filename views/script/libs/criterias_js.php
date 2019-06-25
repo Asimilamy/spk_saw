@@ -27,8 +27,11 @@ $view = empty($page)? 'home' : $page ;
                 type: 'GET',
                 data: {'act': 'get_options_form', 'criteria_id': criteria_id, 'type': type},
                 success: function(html) {
-                    $('#attribute-options').html(html);
-                    $('#attribute-options').slideDown();
+                    $('#attribute-options').html(html).promise().done(function() {
+                        $('#attribute-options').slideDown().promise().done(function() {
+                            $('.option-form').slideDown();
+                        });
+                    });
                 }
             });
         });
