@@ -7,6 +7,11 @@ $view = empty($page)? 'home' : $page ;
     $(document).off('change', '#type').on('change', '#type', function() {
         let criteria_id = $('input[name=id]').val();
         let type = $(this).val();
+        if (type == 'value') {
+            $('.value-weight').slideDown();
+        } else {
+            $('.value-weight').slideUp();
+        }
         get_options_form(criteria_id, type, 'form');
     });
 

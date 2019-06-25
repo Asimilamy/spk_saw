@@ -32,15 +32,19 @@ $view = isset($view)? $view : 'home' ;
                         <div class="col-xs-10"><?php echo $data->attribute; ?></div>
                     </div>
                     <div class="row">
-                        <label for="weight" class="col-xs-2">Weight : </label>
-                        <div class="col-xs-10"><?php echo $data->weight; ?></div>
-                    </div>
-                    <div class="row">
                         <label for="type" class="col-xs-2">Type : </label>
                         <div class="col-xs-10"><?php echo $data->type; ?></div>
                     </div>
-                    <hr>
-                    <div id="attribute-options"></div>
+                    <?php
+                    if ($data->type == 'value') {
+                        ?>
+                        <div class="row">
+                            <label for="weight" class="col-xs-2">Weight : </label>
+                            <div class="col-xs-10"><?php echo $data->weight; ?></div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <div class="row">
                         <label for="created_at" class="col-xs-2">Created At</label>
                         <div class="col-xs-10">
@@ -53,6 +57,8 @@ $view = isset($view)? $view : 'home' ;
                             <?php echo format_date($data->updated_at, 'd M Y, H:i:s'); ?>
                         </div>
                     </div>
+                    <hr>
+                    <div id="attribute-options"></div>
                 </div>
                 <!-- /.box-body -->
             </form>

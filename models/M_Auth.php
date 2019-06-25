@@ -36,8 +36,8 @@ class M_Auth {
 
     public function register_session($row)
     {
-        $_SESSION['user'] = [
-            'user_id' => $row->id,
+        $_SESSION['auth'] = [
+            'id' => $row->id,
             'username' => $row->username,
             'name' => $row->name,
             'email' => $row->email,

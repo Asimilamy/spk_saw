@@ -41,7 +41,7 @@ class M_User {
 		$data['sql_details'] = datatables_conn();
 
 		$data['joinQuery'] = '';
-		$data['extraWhere'] = 'id != \'' . $_SESSION['user']['user_id'] . '\'';
+		$data['extraWhere'] = 'id != \'' . $_SESSION['auth']['id'] . '\'';
 		$data['groupBy'] = '';
 		$data['having'] = '';
 

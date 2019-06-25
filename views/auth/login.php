@@ -17,7 +17,7 @@
                     <div class="card-header bg-primary text-white">Login App</div>
                     <div class="card-body">
                         <div class="form-alert"></div>
-                        <form method="POST" action="" id="formLogin">
+                        <form method="POST" id="formLogin">
                             <input type="hidden" name="act" value="login">
                             <div class="form-group">
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>

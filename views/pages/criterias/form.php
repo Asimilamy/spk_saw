@@ -42,10 +42,6 @@ $view = isset($view)? $view : 'home' ;
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type="number" name="weight" id="weight" class="form-control" placeholder="Weight" value="<?php echo $data->weight; ?>" required>
-                    </div>
-                    <div class="form-group">
                         <label for="type">Type</label>
                         <select name="type" id="type" class="form-control" required>
                             <option value="">-- Select Type --</option>
@@ -57,6 +53,10 @@ $view = isset($view)? $view : 'home' ;
                             }
                             ?>
                         </select>
+                    </div>
+                    <div class="form-group value-weight" style="display: none;">
+                        <label for="weight">Weight</label>
+                        <input type="number" name="weight" id="weight" class="form-control" placeholder="Weight" value="<?php echo $data->weight; ?>">
                     </div>
                     <div id="attribute-options"></div>
                 </div>

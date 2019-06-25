@@ -1,11 +1,11 @@
 <?php
 $page = filter_input(INPUT_GET, 'hal', FILTER_DEFAULT);
 $view_folder = 'views/pages';
-$view_pages = ['home', 'users', 'criterias', 'alternatives', 'evaluations', 'logout'];
+$view_pages = ['home', 'users', 'criterias', 'alternatives', 'evaluations', 'profile', 'logout'];
 
-if ($page == 'users' || $page == 'criterias' || $page == 'alternatives') {
+if ($page == 'users' || $page == 'criterias' || $page == 'alternatives' || $page == 'profile') {
     include_once 'views/script/libs/default_js.php';
-    if ($page == 'criterias') {
+    if ($page == 'criterias' || $page == 'profile') {
         include_once 'views/script/libs/'.$page.'_js.php';
     }
 } elseif ($page == 'home') {

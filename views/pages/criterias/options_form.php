@@ -20,6 +20,16 @@ function options_form($is_mt = TRUE, $name = '', $value = '', $btn = 'add', stri
     $form = '';
     $mt = $is_mt ? 'margin-top: 15px;' : '' ;
     $is_hidden = $btn == 'remove' ? 'display: none;' : '' ;
+    if ($btn == 'add' && $view == 'view') {
+        $form .= '<div class=\'row option-form\' style=\''.$mt.'\'>';
+            $form .= '<label class=\'col-xs-3\'>';
+                $form .= 'Name';
+            $form .= '</label>';
+            $form .= '<label class=\'col-xs-3\'>';
+                $form .= 'Weight';
+            $form .= '</label>';
+        $form .= '</div>';
+    }
     $form .= '<div class=\'row option-form\' style=\''.$mt.' '.$is_hidden.'\'>';
         $form .= '<div class=\'col-xs-3\'>';
             if ($view == 'form') {

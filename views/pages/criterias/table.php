@@ -59,6 +59,7 @@ $view = isset($view)? $view : 'home' ;
             {"targets": 0, "searchable": false, "orderable": false, "data": null},
             {"targets": 1, "searchable": false, "orderable": false},
             {"targets": 2, "searchable": false, "visible": false},
+            {"targets": 5, "searchable": false, "visible": false},
         ],
         "order": [2, 'asc'],
         "rowCallback": function (row, data, iDisplayIndex) {

@@ -1,8 +1,8 @@
 <?php
-$name = isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : 'Alexander Pierce' ;
-$date_registered = format_date($_SESSION['user']['created_at'], 'M Y');
+$name = isset($_SESSION['auth']['name']) ? $_SESSION['auth']['name'] : 'Alexander Pierce' ;
+$date_registered = format_date($_SESSION['auth']['created_at'], 'M Y');
 $default_img = 'assets/admin_lte/dist/img/avatar5.png';
-$user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['user']['user_img'] ;
+$user_img = empty($_SESSION['auth']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['auth']['user_img'] ;
 ?>
 
 <header class="main-header">

@@ -6,7 +6,7 @@ include 'config/Database.php';
 $database = new Database();
 $db = $database->getKoneksi();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['auth'])) {
     include 'views/auth/login.php';
 } else {
     include 'views/template/admin.php';

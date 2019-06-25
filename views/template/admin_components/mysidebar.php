@@ -1,8 +1,8 @@
 <?php
 $page = filter_input(INPUT_GET, 'hal', FILTER_DEFAULT);
-$name = $_SESSION['user']['name'];
+$name = $_SESSION['auth']['name'];
 $default_img = 'assets/admin_lte/dist/img/avatar5.png';
-$user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['user']['user_img'] ;
+$user_img = empty($_SESSION['auth']['user_img']) ? $default_img : 'assets/img/' . $_SESSION['auth']['user_img'] ;
 ?>
 
 <aside class="main-sidebar">
@@ -21,7 +21,7 @@ $user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN MENU</li>
-            <li <?php echo empty($page) || $page == 'home' ? 'class=\'active\'' : '' ; ?>>
+            <li <?php echo empty($page) || $page == 'home' || $page == 'profile' ? 'class=\'active\'' : '' ; ?>>
                 <a href="home" >
                     <i class="fa fa-dashboard"></i> <span>Home</span>
                 </a>

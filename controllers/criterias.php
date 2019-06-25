@@ -45,7 +45,7 @@ if ($act_get == 'load_table') {
         echo render_options($data_options, $view);
     }
 } elseif ($act_get == 'add_options') {
-    echo options_form(TRUE, '', '', 'remove');
+    echo options_form(TRUE, '', '', 'remove', 'form');
 }
 
 if ($act_post == 'submit_form') {
@@ -60,7 +60,7 @@ if ($act_post == 'submit_form') {
     $master_data = [
         'name' => $name,
         'attribute' => $attribute,
-        'weight' => $weight,
+        'weight' => empty($weight) ? 0 : $weight ,
         'type' => $type,
     ];
     if (!empty($id)) {
