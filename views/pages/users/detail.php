@@ -6,7 +6,7 @@ $view = isset($view)? $view : 'home' ;
     <div class="col-xs-12">
         <div class="box box-info box-form">
             <div class="box-header with-border">
-                <h3 class="box-title">Criteria Detail</h3>
+                <h3 class="box-title">User Detail</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -23,24 +23,41 @@ $view = isset($view)? $view : 'home' ;
                 <div class="box-body">
                     <div class="form-alert"></div>
                     <div class="row">
-                        <label for="name" class="col-xs-2">Name : </label>
+                        <label for="username" class="col-xs-2">Username</label>
+                        <input type="hidden" name="act" value="submit_form">
                         <input type="hidden" name="id" value="<?php echo $data->id; ?>">
-                        <div class="col-xs-10"><?php echo $data->name; ?></div>
+                        <div class="col-xs-10">
+                            <?php echo $data->username; ?>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="attribute" class="col-xs-2">Attribute : </label>
-                        <div class="col-xs-10"><?php echo $data->attribute; ?></div>
+                        <label for="name" class="col-xs-2">Name</label>
+                        <div class="col-xs-10">
+                            <?php echo $data->name; ?>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="weight" class="col-xs-2">Weight : </label>
-                        <div class="col-xs-10"><?php echo $data->weight; ?></div>
+                        <label for="email" class="col-xs-2">Email</label>
+                        <div class="col-xs-10">
+                            <?php echo $data->email; ?>
+                        </div>
                     </div>
                     <div class="row">
-                        <label for="type" class="col-xs-2">Type : </label>
-                        <div class="col-xs-10"><?php echo $data->type; ?></div>
+                        <label for="image" class="col-xs-2">User Image</label>
+                        <div class="col-xs-10">
+                            <?php
+                            if (!empty($data->user_img)) {
+                                ?>
+                                <img src="assets/img/<?php echo $data->user_img; ?>" alt="..." class="margin">
+                                <?php
+                            } else {
+                                ?>
+                                <img src="assets/admin_lte/dist/img/avatar.png" alt="..." class="margin">
+                                <?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                    <hr>
-                    <div id="attribute-options"></div>
                     <div class="row">
                         <label for="created_at" class="col-xs-2">Created At</label>
                         <div class="col-xs-10">
@@ -59,7 +76,3 @@ $view = isset($view)? $view : 'home' ;
         </div>
     </div>
 </div>
-
-<script>
-    get_options_form($('input[name=id]').val(), '<?php echo $data->type; ?>', 'view');
-</script>

@@ -14,6 +14,7 @@ $view = empty($page)? 'home' : $page ;
 
     $(document).off('click', '.remove-form').on('click', '.remove-form', function() {
         $('.btn-add').slideDown();
+        load_table();
     });
 
     $(document).off('submit', '#formAjax').on('submit', '#formAjax', function(e) {

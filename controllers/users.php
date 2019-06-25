@@ -6,10 +6,12 @@ $view = 'users';
 include_once $base_path.'helpers/function.php';
 include_once $base_path.'config/Database.php';
 include_once $base_path.'models/M_User.php';
+include_once $base_path.'models/Base_Model.php';
 
 $database = new Database();
 $db = $database->getKoneksi();
 $m_user = new M_User($db);
+$base_model = new Base_Model($db);
 
 $act_post = input_post('act');
 $act_get = input_get('act');
@@ -27,6 +29,10 @@ if ($act_get == 'load_table') {
     $id = input_get('id');
     $data = $m_user->get_row($id);
     include_once $base_path . $view_path . 'form.php';
+} elseif ($act_get == 'view_detail') {
+    $id = input_get('id');
+    $data = $m_user->get_row($id);
+    include_once $base_path . $view_path . 'detail.php';
 }
 
 if ($act_post == 'submit_form') {
@@ -86,12 +92,12 @@ if ($act_post == 'submit_form') {
             exit;
         }
     }
-    $data = $m_user->submit_data($submit_data);
+    $data = $base_model->submit_data('users', $submit_data);
     
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif ($act_post == 'delete_data') {
-    $data = $m_user->delete_data($id);
+    $data = $base_model->delete_data('users', ['id' => input_post('id')]);
     
     header('Content-Type: application/json');
     echo json_encode($data);

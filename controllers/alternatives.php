@@ -1,14 +1,17 @@
 <?php
 session_start();
 $base_path = '../';
-$view_path = 'views/pages/users/';
+$view_path = 'views/pages/alternatives/';
+$view = 'alternatives';
 include_once $base_path.'helpers/function.php';
 include_once $base_path.'config/Database.php';
-include_once $base_path.'models/M_Users.php';
+include_once $base_path.'models/M_Alternative.php';
+include_once $base_path.'models/Base_Model.php';
 
 $database = new Database();
 $db = $database->getKoneksi();
-$m_users = new M_Users($db);
+$m_alternative = new M_Alternative($db);
+$base_model = new Base_Model($db);
 
 $act_post = input_post('act');
 $act_get = input_get('act');
@@ -16,7 +19,7 @@ $act_get = input_get('act');
 if ($act_get == 'load_table') {
     include_once $base_path . $view_path . 'table.php';
 } elseif ($act_get == 'get_table_data') {
-    $data = $m_users->ssp_datatables();
+    $data = $m_alternative->ssp_datatables();
 
     require($base_path . 'config/ssp.class.php');
     echo json_encode(
@@ -24,74 +27,32 @@ if ($act_get == 'load_table') {
     );
 } elseif ($act_get == 'get_form') {
     $id = input_get('id');
-    $data = $m_users->get_row($id);
+    $data = $m_alternative->get_row($id);
     include_once $base_path . $view_path . 'form.php';
+} elseif($act_get == 'view_detail') {
+    $id = input_get('id');
+    $data = $m_alternative->get_row($id);
+    include_once $base_path . $view_path . 'detail.php';
 }
 
 if ($act_post == 'submit_form') {
     $id = filter_input(INPUT_POST, 'id', FILTER_DEFAULT);
-    $username = filter_input(INPUT_POST, 'username', FILTER_DEFAULT);
-    $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
-    $password_confirm = filter_input(INPUT_POST, 'password_confirm', FILTER_DEFAULT);
     $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-
-    $msg = '';
-    if (!$m_users->chk_username($username, $id)) {
-        $msg .= '<li>Username exist, pick another Username!</li>';
-    }
-
-    if (empty($id) && empty($password)) {
-        $msg .= '<li>Password field is required!</li>';
-    }
-
-    if (!empty($password) && !empty($password_confirm)) {
-        if ($password != $password_confirm) {
-            $msg .= '<li>Password and Password Confirm doesn\'t match!</li>';
-        }
-    }
-
-    if (!empty($msg)) {
-        $alert_msg = '<ul>' . $msg . '</ul>';
-        $data['status'] = 'error';
-        $data['alert'] = render_alert_lte('danger', TRUE, 'Error!', $alert_msg);
-
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
-    $submit_data = [
-        'username' => $username,
+    
+    $master_data = [
         'name' => $name,
-        'email' => $email,
     ];
-    if (!empty($password)) {
-        $submit_data = array_merge($submit_data, ['password' => hash_text($password)]);
-    }
     if (!empty($id)) {
-        $submit_data = array_merge($submit_data, ['id' => $id]);
+        $master_data = array_merge($master_data, ['id' => $id]);
     }
-    if (!empty($_FILES['user_image']['name'])) {
-        $upload = upload_files($_FILES['user_image'], $base_path . 'assets/img/');
-        if ($upload['status'] == 'success') {
-            $submit_data = array_merge($submit_data, ['user_img' => $upload['img_name']]);
-        } else {
-            $alert_msg = '<ul>' . $upload['msg'] . '</ul>';
-            $data['status'] = 'error';
-            $data['alert'] = render_alert_lte('danger', TRUE, 'Error!', $alert_msg);
     
-            header('Content-Type: application/json');
-            echo json_encode($data);
-            exit;
-        }
-    }
-    $data = $m_users->submit_data($submit_data);
+    $master = $base_model->submit_data('alternatives', $master_data);
     
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode($master);
 } elseif ($act_post == 'delete_data') {
-    $data = $m_users->delete_data($id);
+    $master = $base_model->delete_data('alternatives', ['id' => input_post('id')]);
     
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode($master);
 }
