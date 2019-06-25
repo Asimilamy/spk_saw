@@ -40,7 +40,7 @@ function options_form($is_mt = TRUE, $name = '', $value = '', $btn = 'add', stri
         $form .= '</div>';
         $form .= '<div class=\'col-xs-3\'>';
             if ($view == 'form') {
-                $form .= '<input type=\'number\' name=\'option_value[]\' class=\'form-control\' placeholder=\'Option Value\' value=\''.$value.'\'>';
+                $form .= '<input type=\'text\' name=\'option_value[]\' class=\'form-control\' placeholder=\'Option Value\' value=\''.$value.'\'>';
             } elseif ($view == 'view') {
                 $form .= $value;
             }

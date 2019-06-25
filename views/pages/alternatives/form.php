@@ -28,6 +28,7 @@ $view = isset($view)? $view : 'home' ;
                         <input type="hidden" name="id" value="<?php echo $data->id; ?>">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?php echo $data->name; ?>" required autofocus>
                     </div>
+                    <div id="criteriasForm"></div>
                 </div>
                 <!-- /.box-body -->
 
@@ -38,3 +39,7 @@ $view = isset($view)? $view : 'home' ;
         </div>
     </div>
 </div>
+
+<script>
+    load_criterias('<?php echo $data->id; ?>');
+</script>

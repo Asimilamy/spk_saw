@@ -76,9 +76,9 @@ class M_Alternative {
 		return $data;
     }
     
-    public function get_options($id = '')
+    public function get_values($id = '')
     {
-        $query = 'SELECT * FROM criteria_options WHERE criteria_id = ?';
+        $query = 'SELECT * FROM alternative_values WHERE alternative_id = ?';
         $stmt = $this->db->prepare($query);
         $stmt->execute([$id]);
         $result = $stmt->fetchAll(PDO::FETCH_CLASS);

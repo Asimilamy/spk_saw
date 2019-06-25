@@ -9,8 +9,37 @@ class Base_Model {
     {
         $this->db = $db;
 	}
+
+	public function get_data(string $tbl_name, array $params, string $return)
+	{
+		$query = 'SELECT * FROM ' . $tbl_name;
+		$total = count($params);
+		$no = 0;
+		if ($total > 0) {
+			foreach ($params as $param => $columns) {
+				$no++;
+				$query .= $no > 1 ? ' AND ' : ' WHERE ' ;
+				foreach ($columns as $column => $value) {
+					$query .= $column;
+					if ($param == 'where') {
+						$query .= ' = '.$value;
+					} elseif ($param == 'in') {
+						$value = is_array($value) ? implode('\', \'', $value) : $value ;
+						$query .= ' IN (\''.$value.'\')';
+					} elseif ($param == 'or') {
+						$query .= ' = '.$value;
+					}
+				}
+			}
+		}
+		$stmt = $this->db->prepare($query);
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_CLASS);
+
+		return $return == 'result' ? $result : $query ;
+	}
 	
-	public function count($tbl_name, $column)
+	public function count(string $tbl_name, string $column)
 	{
 		$query = 'SELECT COUNT('.$column.') AS total FROM '.$tbl_name;
 		$stmt = $this->db->prepare($query);
@@ -20,7 +49,7 @@ class Base_Model {
 		return $total;
 	}
 
-    public function insert($tbl_name, $data = [])
+    public function insert(string $tbl_name, array $data)
     {
 		if (!empty($data)) {
 			$query = 'INSERT INTO '.$tbl_name.' SET ';
@@ -41,7 +70,7 @@ class Base_Model {
 		return $data;
 	}
 
-    public function update($tbl_name, $data = [], $params = [])
+    public function update(string $tbl_name, array $data, array $params)
     {
 		if (!empty($data) && !empty($params)) {
 			$query = 'UPDATE '.$tbl_name.' SET ';

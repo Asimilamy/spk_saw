@@ -33,6 +33,17 @@ if ($act_get == 'load_table') {
     $id = input_get('id');
     $data = $m_alternative->get_row($id);
     include_once $base_path . $view_path . 'detail.php';
+} elseif ($act_get == 'load_criterias') {
+    $id = input_get('id');
+    $data = $m_alternative->get_values($id);
+    $criterias = $base_model->get_data('criterias', [], 'result');
+    if (!empty($criterias)) {
+        foreach ($criterias as $criteria) {
+            $criteria_id[] = $criteria->id;
+        }
+        $options = $base_model->get_data('criteria_options', ['in' => ['criteria_id' => $criteria_id]], 'result');
+    }
+    include_once $base_path . $view_path . 'values_form.php';
 }
 
 if ($act_post == 'submit_form') {
