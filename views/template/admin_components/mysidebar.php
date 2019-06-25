@@ -31,19 +31,14 @@ $user_img = empty($_SESSION['user']['user_img']) ? $default_img : 'assets/img/' 
                     <i class="fa fa-user-circle-o"></i> <span>Users</span>
                 </a>
             </li>
-            <li <?php echo $page == 'values' ? 'class=\'active\'' : '' ; ?>>
-                <a href="values">
-                    <i class="fa fa-area-chart"></i> <span>Values</span>
-                </a>
-            </li>
             <li <?php echo $page == 'criterias' ? 'class=\'active\'' : '' ; ?>>
                 <a href="criterias">
                     <i class="fa fa-tags"></i> <span>Criterias</span>
                 </a>
             </li>
-            <li <?php echo $page == 'subjects' ? 'class=\'active\'' : '' ; ?>>
-                <a href="subjects">
-                    <i class="fa fa-users"></i> <span>Subjects</span>
+            <li <?php echo $page == 'alternatives' ? 'class=\'active\'' : '' ; ?>>
+                <a href="alternatives">
+                    <i class="fa fa-users"></i> <span>Alternatives</span>
                 </a>
             </li>
             <li <?php echo $page == 'evaluations' ? 'class=\'active\'' : '' ; ?>>

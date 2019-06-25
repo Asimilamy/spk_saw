@@ -9,10 +9,10 @@ $view = isset($view)? $view : 'home' ;
                 <th>No.</th>
                 <th>Options</th>
                 <th>Kode</th>
-                <th>Username</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Created At</th>
+                <th>Attribute</th>
+                <th>Weight</th>
+                <th>Type</th>
             </tr>
         </thead>
     </table>

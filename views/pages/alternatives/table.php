@@ -1,5 +1,6 @@
 <?php
-$view = isset($view)? $view : 'home' ;
+$page = filter_input(INPUT_GET, 'hal', FILTER_DEFAULT);
+$view = empty($page)? 'home' : $page ;
 ?>
 
 <div class="table-responsive">
@@ -35,7 +36,7 @@ $view = isset($view)? $view : 'home' ;
         "serverSide": true,
         "ordering" : true,
         "ajax": {
-            "url" : "controllers/<?php echo $view; ?>.php",
+            "url" : "controllers/users.php",
             "type" : "GET",
             "data" : {'act' : 'get_table_data'},
         },

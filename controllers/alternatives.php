@@ -2,14 +2,13 @@
 session_start();
 $base_path = '../';
 $view_path = 'views/pages/users/';
-$view = 'users';
 include_once $base_path.'helpers/function.php';
 include_once $base_path.'config/Database.php';
-include_once $base_path.'models/M_User.php';
+include_once $base_path.'models/M_Users.php';
 
 $database = new Database();
 $db = $database->getKoneksi();
-$m_user = new M_User($db);
+$m_users = new M_Users($db);
 
 $act_post = input_post('act');
 $act_get = input_get('act');
@@ -17,7 +16,7 @@ $act_get = input_get('act');
 if ($act_get == 'load_table') {
     include_once $base_path . $view_path . 'table.php';
 } elseif ($act_get == 'get_table_data') {
-    $data = $m_user->ssp_datatables();
+    $data = $m_users->ssp_datatables();
 
     require($base_path . 'config/ssp.class.php');
     echo json_encode(
@@ -25,7 +24,7 @@ if ($act_get == 'load_table') {
     );
 } elseif ($act_get == 'get_form') {
     $id = input_get('id');
-    $data = $m_user->get_row($id);
+    $data = $m_users->get_row($id);
     include_once $base_path . $view_path . 'form.php';
 }
 
@@ -38,7 +37,7 @@ if ($act_post == 'submit_form') {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
     $msg = '';
-    if (!$m_user->chk_username($username, $id)) {
+    if (!$m_users->chk_username($username, $id)) {
         $msg .= '<li>Username exist, pick another Username!</li>';
     }
 
@@ -86,12 +85,12 @@ if ($act_post == 'submit_form') {
             exit;
         }
     }
-    $data = $m_user->submit_data($submit_data);
+    $data = $m_users->submit_data($submit_data);
     
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif ($act_post == 'delete_data') {
-    $data = $m_user->delete_data($id);
+    $data = $m_users->delete_data($id);
     
     header('Content-Type: application/json');
     echo json_encode($data);

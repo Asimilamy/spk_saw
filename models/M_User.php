@@ -2,7 +2,7 @@
 $base_path = isset($base_path) ? $base_path : '../' ;
 include_once $base_path . 'helpers/function.php';
 
-class M_Users {
+class M_User {
     private $db = null;
 
     public function __construct($db)
@@ -58,7 +58,7 @@ class M_Users {
 		$btns[] = get_btn(array('access' => $is_update_access, 'title' => 'Ubah', 'icon' => 'pencil', 'onclick' => 'get_form(\''.$id.'\')'));
 		$btns[] = get_btn_divider();
 		$btns[] = get_btn(array('access' => $is_delete_access, 'title' => 'Hapus', 'icon' => 'trash',
-			'onclick' => 'return confirm(\'Do you really want to delete User = '.$var.'?\')?hapus_data(\''.$id.'\'):false'));
+			'onclick' => 'return confirm(\'Do you really want to delete User = '.$var.'?\')?delete_data(\''.$id.'\'):false'));
 		$btn_group = group_btns($btns, 'Opsi');
 
 		return $btn_group;

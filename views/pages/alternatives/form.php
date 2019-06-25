@@ -1,7 +1,3 @@
-<?php
-$view = isset($view)? $view : 'home' ;
-?>
-
 <div class="row form-row">
     <div class="col-xs-12">
         <div class="box box-primary box-form">
