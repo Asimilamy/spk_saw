@@ -21,25 +21,24 @@
                     <h3 class="box-title">Evaluation Form</h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <button type="button" class="btn btn-box-tool remove-form" data-widget="remove" data-toggle="tooltip" title="Remove">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
                 </div>
-                <form method="POST" id="formEvaluation">
-                    <div class="box-body">
+                <div class="box-body">
+                    <form method="POST" id="formEvaluation">
                         <div id="box-alert"></div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" title="Start Evaluation">
                                 Start Evaluation <i class="fa fa-line-chart"></i>
                             </button>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                     <!-- /.box-body -->
             </div>
             <!-- /.box -->

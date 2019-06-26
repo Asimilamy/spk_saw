@@ -2,5 +2,5 @@
 session_destroy();
 ?>
 <script type="text/javascript">
-	window.location.assign("../");
+	window.location.assign("../spk_intan");
 </script>
