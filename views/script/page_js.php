@@ -10,4 +10,6 @@ if ($page == 'users' || $page == 'criterias' || $page == 'alternatives' || $page
     }
 } elseif ($page == '' || $page == 'home') {
     include_once 'views/script/libs/home_js.php';
+} elseif ($page == 'evaluations') {
+    include_once 'views/script/libs/evaluation_js.php';
 }
