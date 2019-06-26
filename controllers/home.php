@@ -18,8 +18,7 @@ if ($act_get == 'get_count') {
     $data = [
         'user' => $base_model->count('users', 'id'),
         'criteria' => $base_model->count('criterias', 'id'),
-        'alternative' => $base_model->count('alternative', 'id'),
-        'evaluation' => $base_model->count('users', 'id'),
+        'alternative' => $base_model->count('alternatives', 'id'),
     ];
 
     header('Content-Type: application/json');

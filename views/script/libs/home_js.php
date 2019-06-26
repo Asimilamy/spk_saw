@@ -15,7 +15,6 @@ $view = empty($page)? 'home' : $page ;
                 $('#userCount').html(data.user);
                 $('#criteriaCount').html(data.criteria);
                 $('#alternativeCount').html(data.alternative);
-                $('#evaluationCount').html(data.evaluation);
             }
         });
     }

@@ -102,6 +102,90 @@ $criteria_options = isset($criteria_options) ? $criteria_options : [] ;
                         ?>
                     </tbody>
                 </table>
+
+                <h3>R Normalization</h3>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Alternatives</th>
+                            <?php
+                            $no = 0;
+                            foreach ($criterias as $criteria) {
+                                $no++;
+                                echo '<th>C' . $no . '</th>';
+                            }
+                            ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 0;
+                        foreach ($alternatives as $alternative) {
+                            $no++;
+                            ?>
+                            <tr>
+                                <td><?php echo 'A' . $no; ?></td>
+                                <?php
+                                foreach ($criterias as $criteria) {
+                                    foreach ($alternative_values as $alternative_value) {
+                                        if ($alternative_value->criteria_id == $criteria->id) {
+                                            $values[$criteria->id][] = $alternative_value->weight;
+                                            if ($alternative_value->alternative_id == $alternative->id) {
+                                                $a_weight = $alternative_value->weight;
+                                                if ($criteria->attribute == 'cost') {
+                                                    $alternative_r = min($values[$criteria->id]) / $a_weight;
+                                                } elseif ($criteria->attribute == 'benefit') {
+                                                    $alternative_r = $a_weight / max($values[$criteria->id]);
+                                                }
+                                                $alternative_criteria_w[$alternative->id] = $criteria->weight / 100;
+                                                $alternative_rx[$alternative->id][$criteria->id] = $alternative_r;
+                                                $result_alternative[$alternative->id][] = $alternative_criteria_w[$alternative->id] * $alternative_r;
+                                                echo '<td>' . $alternative_r . '</td>';
+                                            }
+                                        }
+                                    }
+                                } 
+                                ?>
+                            </tr>
+                            <?php
+                            $alt_res[$alternative->id] = round(array_sum($result_alternative[$alternative->id]), 2);
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                
+                <h3>Rank Table</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Alternatives</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 0;
+                        foreach ($alternatives as $alternative) {
+                            $result[] = ['result' => $alt_res[$alternative->id], 'name' => $alternative->name];
+                        }
+                        asort($result);
+                        $total = count($result);
+                        for ($i = 0; $i < $total; $i++) {
+                            $no++;
+                            $first = $no == 1 ? 'background-color: blue; color: white;' : '' ;
+                            $last = $no == $total ? 'background-color: red; color: white' : '' ;
+                            ?>
+                            <tr style="<?php echo $first.' '.$last; ?>">
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $result[$i]['name']; ?></td>
+                                <td><?php echo $result[$i]['result']; ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
