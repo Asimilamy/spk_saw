@@ -176,7 +176,7 @@ $criteria_options = isset($criteria_options) ? $criteria_options : [] ;
                             $first = $no == 1 ? 'background-color: blue; color: white;' : '' ;
                             $last = $no == $total ? 'background-color: red; color: white' : '' ;
                             ?>
-                            <tr style="<?php echo $first.' '.$last; ?>">
+                            <tr <?php echo !empty($first) || !empty($last) ? 'style=\'' . $first .' '. $last .'\'' : '' ; ?>>
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $result[$i]['name']; ?></td>
                                 <td><?php echo $result[$i]['result']; ?></td>
