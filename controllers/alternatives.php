@@ -35,6 +35,7 @@ if ($act_get == 'load_table') {
     include_once $base_path . $view_path . 'detail.php';
 } elseif ($act_get == 'load_criterias') {
     $id = input_get('id');
+    $view = input_get('view');
     $values = $m_alternative->get_values($id);
     $criterias = $base_model->get_data('criterias', [], 'result');
     if (!empty($criterias)) {

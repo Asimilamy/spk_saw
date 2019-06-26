@@ -39,9 +39,14 @@ $view = isset($view)? $view : 'home' ;
                             <?php echo format_date($data->updated_at, 'd M Y, H:i:s'); ?>
                         </div>
                     </div>
+                    <div id="criteriasForm"></div>
                 </div>
                 <!-- /.box-body -->
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    load_criterias('<?php echo $data->id; ?>', 'view');
+</script>

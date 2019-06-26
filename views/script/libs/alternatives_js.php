@@ -9,12 +9,12 @@ $view = empty($page)? 'home' : $page ;
         $(this).prev().val($(this).find(':selected').data('id'));
     });
 
-    function load_criterias(id) {
+    function load_criterias(id, view) {
         $('#criteriasForm').slideUp(function() {
             $.ajax({
                 url: 'controllers/<?php echo $view; ?>.php',
                 type: 'GET',
-                data: {'act': 'load_criterias', 'id': id},
+                data: {'act': 'load_criterias', 'id': id, 'view': view},
                 success: function(html) {
                     $('#criteriasForm').html(html).promise().done(function() {
                         $(this).slideDown();

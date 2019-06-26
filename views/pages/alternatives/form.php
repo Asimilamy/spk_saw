@@ -41,5 +41,5 @@ $view = isset($view)? $view : 'home' ;
 </div>
 
 <script>
-    load_criterias('<?php echo $data->id; ?>');
+    load_criterias('<?php echo $data->id; ?>', 'form');
 </script>
