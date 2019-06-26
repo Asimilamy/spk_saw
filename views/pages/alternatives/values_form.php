@@ -13,18 +13,18 @@ if (!empty($values)) {
     }
 }
 
-foreach ($criterias as $criteria) {
-    ?>
-    <hr>
-    <div class="form-group">
-        <input type="hidden" name="criteria_ids[]" value="<?php echo $criteria->id; ?>">
-        <label><?php echo 'Nama Kriteria : ' . $criteria->name; ?></label>
-    </div>
-    <div class="row">
-        <div class="form-group col-xs-12 col-md-6">
-            <?php
-            if ($criteria->type == 'option') {
-                if ($view == 'form') {
+if ($view == 'form') {
+    foreach ($criterias as $criteria) {
+        ?>
+        <hr>
+        <div class="form-group">
+            <input type="hidden" name="criteria_ids[]" value="<?php echo $criteria->id; ?>">
+            <label><?php echo 'Nama Kriteria : ' . $criteria->name; ?></label>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-6">
+                <?php
+                if ($criteria->type == 'option') {
                     ?>
                     <input type="hidden" name="option_ids[]" class="criteria-ids" value="<?php echo isset($alternative_criterias[$criteria->id]) ? $alternative_criterias[$criteria->id] : '' ; ?>">
                     <select name="criteria_weights[]" class="form-control criteria-select">
@@ -39,35 +39,52 @@ foreach ($criterias as $criteria) {
                         ?>
                     </select>
                     <?php
-                } elseif ($view == 'view') {
-                    foreach ($options as $option) {
-                        if ($option->criteria_id == $criteria->id && in_array($option->id, $alternative_options)) {
-                            ?>
-                            <label><?php echo $option->value.' '.$option->name; ?></label>
-                            <?php
-                        }
+                } else {
+                    ?>
+                    <input type="text" name="criteria_weights[]" class="form-control" placeholder="Bobot Kriteria" value="<?php echo isset($alternative_weights[$criteria->id]) ? $alternative_weights[$criteria->id] : '' ; ?>">
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-6">
+                <input type="text" name="criteria_values[]" class="form-control" placeholder="Nilai" value="<?php echo isset($alternative_values[$criteria->id]) ? $alternative_values[$criteria->id] : '' ; ?>">
+            </div>
+        </div>
+        <?php
+    }
+} elseif ($view == 'view') {
+    ?>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Kriteria</th>
+                <th>Pilihan</th>
+                <th>Bobot</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 0;
+            foreach ($criterias as $criteria) {
+                foreach ($options as $option) {
+                    if ($option->criteria_id == $criteria->id && in_array($option->id, $alternative_options)) {
+                        $no++;
+                        echo '<tr>';
+                            echo '<td>' . $no . '</td>';
+                            echo '<td>' . $criteria->name . '</td>';
+                            echo '<td>' . $option->name . '</td>';
+                            echo '<td>' . $alternative_weights[$criteria->id] . '</td>';
+                            echo '<td>' . $alternative_values[$criteria->id] . '</td>';
+                        echo '</tr>';
                     }
                 }
-            } else {
-                ?>
-                <input type="text" name="criteria_weights[]" class="form-control" placeholder="Bobot Kriteria" value="<?php echo isset($alternative_weights[$criteria->id]) ? $alternative_weights[$criteria->id] : '' ; ?>">
-                <?php
             }
             ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-xs-12 col-md-6">
-            <?php
-            if ($view == 'form') {
-                ?>
-                <input type="text" name="criteria_values[]" class="form-control" placeholder="Nilai" value="<?php echo isset($alternative_values[$criteria->id]) ? $alternative_values[$criteria->id] : '' ; ?>">
-                <?php
-            } elseif ($view == 'view') {
-                echo isset($alternative_values[$criteria->id]) ? $alternative_values[$criteria->id] : '' ;
-            }
-            ?>
-        </div>
-    </div>
+        </tbody>
+    </table>
     <?php
 }
