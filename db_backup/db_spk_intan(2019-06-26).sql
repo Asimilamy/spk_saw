@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 25, 2019 at 11:45 AM
+-- Generation Time: Jun 26, 2019 at 06:23 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -39,6 +39,13 @@ CREATE TABLE `alternatives` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `alternatives`
+--
+
+INSERT INTO `alternatives` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(3, 'Oppo F1 Plus', '2019-06-25 06:39:31', '2019-06-25 07:15:34');
+
 -- --------------------------------------------------------
 
 --
@@ -51,10 +58,22 @@ CREATE TABLE `alternative_values` (
   `alternative_id` int(10) DEFAULT NULL,
   `criteria_id` int(10) DEFAULT NULL,
   `criteria_option_id` int(10) DEFAULT NULL,
-  `desc` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `weight` decimal(7,2) DEFAULT NULL,
+  `value` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `alternative_values`
+--
+
+INSERT INTO `alternative_values` (`id`, `alternative_id`, `criteria_id`, `criteria_option_id`, `weight`, `value`, `created_at`, `updated_at`) VALUES
+(16, 3, 2, 38, '1.00', '5500000', '2019-06-25 07:15:34', NULL),
+(17, 3, 3, 57, '4.00', '4 Gb', '2019-06-25 07:15:35', NULL),
+(18, 3, 4, 27, '5.00', '32 Gb', '2019-06-25 07:15:35', NULL),
+(19, 3, 5, 28, '5.00', 'Octacore', '2019-06-25 07:15:35', NULL),
+(20, 3, 6, 32, '3.00', '13 MP', '2019-06-25 07:15:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,8 +86,8 @@ CREATE TABLE `criterias` (
   `id` int(10) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `attribute` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `weight` decimal(7,2) DEFAULT NULL,
   `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `weight` decimal(7,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -77,12 +96,12 @@ CREATE TABLE `criterias` (
 -- Dumping data for table `criterias`
 --
 
-INSERT INTO `criterias` (`id`, `name`, `attribute`, `weight`, `type`, `created_at`, `updated_at`) VALUES
-(2, 'Harga', 'cost', '1.00', 'option', '2019-06-25 02:15:06', '2019-06-25 03:28:36'),
-(3, 'RAM', 'benefit', '0.00', 'option', '2019-06-25 02:31:34', NULL),
-(4, 'Memory Internal', 'benefit', '0.00', 'option', '2019-06-25 02:33:05', NULL),
-(5, 'Processor', 'benefit', '0.00', 'option', '2019-06-25 02:33:41', NULL),
-(6, 'Camera', 'benefit', '0.00', 'option', '2019-06-25 02:34:16', NULL);
+INSERT INTO `criterias` (`id`, `name`, `attribute`, `type`, `weight`, `created_at`, `updated_at`) VALUES
+(2, 'Harga', 'cost', 'option', '20.00', '2019-06-25 02:15:06', '2019-06-25 03:28:36'),
+(3, 'RAM', 'benefit', 'option', '20.00', '2019-06-25 02:31:34', '2019-06-25 07:09:09'),
+(4, 'Memory Internal', 'benefit', 'option', '20.00', '2019-06-25 02:33:05', NULL),
+(5, 'Processor', 'benefit', 'option', '20.00', '2019-06-25 02:33:41', NULL),
+(6, 'Camera', 'benefit', 'option', '20.00', '2019-06-25 02:34:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -105,11 +124,6 @@ CREATE TABLE `criteria_options` (
 --
 
 INSERT INTO `criteria_options` (`id`, `criteria_id`, `name`, `value`, `created_at`, `updated_at`) VALUES
-(18, 3, '0 - 1 Gb', '1.00', '2019-06-25 02:31:34', NULL),
-(19, 3, '2 Gb', '2.00', '2019-06-25 02:31:34', NULL),
-(20, 3, '3 Gb', '3.00', '2019-06-25 02:31:34', NULL),
-(21, 3, '4 Gb', '4.00', '2019-06-25 02:31:34', NULL),
-(22, 3, '> 4 Gb', '5.00', '2019-06-25 02:31:34', NULL),
 (23, 4, '0 - 4 Gb', '1.00', '2019-06-25 02:33:05', NULL),
 (24, 4, '8 Gb', '2.00', '2019-06-25 02:33:05', NULL),
 (25, 4, '16 Gb', '3.00', '2019-06-25 02:33:05', NULL),
@@ -125,7 +139,12 @@ INSERT INTO `criteria_options` (`id`, `criteria_id`, `name`, `value`, `created_a
 (35, 2, '1 - 3 Juta', '4.00', '2019-06-25 03:28:36', NULL),
 (36, 2, '3 - 4 Juta', '3.00', '2019-06-25 03:28:36', NULL),
 (37, 2, '4 - 5 Juta', '2.00', '2019-06-25 03:28:36', NULL),
-(38, 2, '> 5 juta', '1.00', '2019-06-25 03:28:37', NULL);
+(38, 2, '> 5 juta', '1.00', '2019-06-25 03:28:37', NULL),
+(54, 3, '0 - 1 Gb', '1.00', '2019-06-25 07:09:09', NULL),
+(55, 3, '2 Gb', '2.00', '2019-06-25 07:09:09', NULL),
+(56, 3, '3 Gb', '3.00', '2019-06-25 07:09:09', NULL),
+(57, 3, '4 Gb', '4.00', '2019-06-25 07:09:09', NULL),
+(58, 3, '> 4 Gb', '5.00', '2019-06-25 07:09:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -195,13 +214,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alternatives`
 --
 ALTER TABLE `alternatives`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `alternative_values`
 --
 ALTER TABLE `alternative_values`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `criterias`
@@ -213,7 +232,7 @@ ALTER TABLE `criterias`
 -- AUTO_INCREMENT for table `criteria_options`
 --
 ALTER TABLE `criteria_options`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `users`
