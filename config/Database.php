@@ -2,7 +2,7 @@
 class Database {
 	//id login utk database
 	private $host = "localhost";
-	private $db_name = "db_spk_intan";
+	private $db_name = "db_spk_saw";
 	private $username = "root";
 	private $password = "";
 
